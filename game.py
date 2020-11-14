@@ -6,23 +6,23 @@ class Game:
     docstring
     """
 
-    def __init__(self, board, line_thickness, line_color, cell_height):
+    def __init__(self, board, line_thickness, line_color, cell_size):
         self.board = board
         self.line_thickness = line_thickness
         self.line_color = line_color
-        self.cell_height = cell_height
+        self.cell_size = cell_size
         self.initial_board = board
         self.undefined_cell = (-1, -1)
 
     def draw_numbers(self, screen, off_width, off_height):
-        font = pg.font.SysFont(None, self.cell_height)
+        font = pg.font.SysFont(None, self.cell_size)
         for i in range(9):
             for j in range(9):
                 nr = self.board[i][j]
                 n_text = font.render(str(nr), True, pg.Color('black'))
                 screen.blit(n_text, pg.Vector2(
-                    (i * self.cell_height + off_width + self.cell_height / 3),
-                    (j * self.cell_height + off_height + self.cell_height / 4)))
+                    (i * self.cell_size + off_width + self.cell_size / 3),
+                    (j * self.cell_size + off_height + self.cell_size / 4)))
 
     def get_col(self, col):
         return [row[col] for row in self.board]

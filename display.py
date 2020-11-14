@@ -6,18 +6,18 @@ class Display:
     docstring
     """
 
-    def __init__(self, game, screen_height, screen_width, offset_height, offset_width, background_color):
+    def __init__(self, game, screen_width, screen_height, offset_height, background_color):
         self.screen_height = screen_height
         self.screen_width = screen_width
         self.screen = pg.display.set_mode((screen_width, screen_height))
         self.offset_height = offset_height
-        self.offset_width = offset_width
+        self.offset_width = (screen_width - game.cell_size * 9) / 2
         self.background_color = background_color
         self.game = game
 
     def draw_screen(self):
         self.screen.fill(self.background_color)
-        cell_h = self.game.cell_height
+        cell_h = self.game.cell_size
         for i in range(10):
             thickness = self.game.line_thickness
             if i % 3 == 0:
@@ -33,4 +33,3 @@ class Display:
 
         self.game.draw_numbers(
             self.screen, self.offset_width, self.offset_height)
-        pg.display.update()
